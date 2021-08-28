@@ -1,5 +1,10 @@
-from tkinter import *
+#NO PUDIMOS CONVERTIR EL ARCHIVO A EJECUTABLE Y POR ESO ADJUNTAMOS SOLO UNA CAPTURA
+
+
+from tkinter import * 
 from tkinter import ttk
+from tkinter import messagebox
+from tkinter.ttk import Combobox
 import  G8_datbase
 
 
@@ -8,9 +13,6 @@ frame_app = Frame(window, width=900, height=580, bg="thistle2")
 frame_app.pack()
 
 my_table=ttk.Treeview(window)
-
-
-
 
 
 import mysql.connector
@@ -84,22 +86,54 @@ def xxx():
   
    
     lol_db = G8_datbase.MyDatabase()
-    lol_db.insert_db(nombre_de_articulo, precio_unitario, id_area)
-    lol_db.read_db()
+    lol_db.insert_db1(nombre_de_articulo, precio_unitario, id_area)
+    lol_db.read_db1()
     show_users()
+
+    messagebox.showinfo(message="Su registro fue exitoso;))",title="REGISTRO EXITOSO")
+
+    
      
 def leer():
     lol_db = G8_datbase.MyDatabase()
-    lol_db.read_db()
+    lol_db.read_db1()
+
+def taste():
+    window.destroy()
 
 
+
+frame2=Frame(frame_app, width=900, height=70, bg="SlateBlue1")
+frame2.place(x=0, y =0)
 
 
 frame1=Frame(frame_app, width=380, height=290, bg="tomato")
 frame1.place(x=20, y =100)
 
-frame2=Frame(frame_app, width=900, height=70, bg="SlateBlue1")
-frame2.place(x=0, y =0)
+
+
+label_pro = Label(frame1, 
+              text="Ver de áreas",
+              font=("Century Gothic", "14", "bold"),
+              bg="tomato",
+              fg="white")
+label_pro.place(x=9, y=230)
+
+combo= Combobox(frame1, 
+                values=[
+                    "1.Limpieza",
+                    "2.Papeleria",
+                    "3.Tecnología",
+                    "4.Alimentoss",
+                    "5.Deportivoss",
+                    "6.Higiene",
+                
+                ])
+combo.place(x=9, y=265)
+    
+
+
+
 
 
 
@@ -134,7 +168,7 @@ entry_pre = Entry(frame1, justify=LEFT, width=20,
 entry_pre.place(x=135, y=130)
 
 label_can = Label(frame1, 
-              text="AREA (DEL1-6)",
+              text="ID ÁREA (1-6)",
               font=("Century Gothic", "12", "bold"),
               fg="white",
               bg="tomato")
@@ -158,6 +192,16 @@ button_ag = Button(frame_app, text="Ver pedido",
                         fg=("thistle2"),
                         border=1,
                         command=leer)
-button_ag.place(x=220, y=460)
+button_ag.place(x=225, y=460)
+
+button_arw= Button(frame_app, text="SALIR", 
+                        font=("Century Gothic", "20", "bold"),
+                        bg=("tomato"),
+                        fg=("thistle2"),
+                        border=1,
+                        command=taste)
+button_arw.place(x=700, y=460)
+
+
 
 window.mainloop()
